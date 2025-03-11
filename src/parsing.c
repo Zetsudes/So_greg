@@ -12,99 +12,65 @@
 
 #include "../include/so_long.h"
 
-void	init_count(t_count *count)
+void    check_map(t_data *data)
 {
-	count->p = 0;
-	count->c = 0;
-	count->e = 0;
+    int i;
+	int x;
+	int len;
+    char **map;
+
+    i = 0;
+    map = data->map->map;
+	len = ft_strlen(map[0]);
+    while (i < data->map->size_y)
+    {
+        x = 0;
+        while (x < data->map->size_x)
+        {
+            if (map[i][x] != '0' && map[i][x] != '1' && map[i][x] != 'C' &&
+                map[i][x] != 'P' && map[i][x] != 'E')
+                handle_error("Error: Invalid character found in map.\n");
+            if ((i == 0 || x == 0 || i == data->map->size_y - 1 || x == data->map->size_x - 1) && map[i][x] != '1')
+                handle_error("Error: Map borders must be walls\n");
+            x++;
+        }
+        if (ft_strlen(map[i]) != (size_t)len)
+            handle_error("Error: Map must be rectangular\n");
+        i++;
+    }
 }
 
-void	check_map_elements(char **map)
+void    check_elements(t_data *data)
 {
-	int		i;
-	int		j;
-	t_count	count;
+    int x;
+	int y;
 
-	init_count(&count);
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C'
-				&& map[i][j] != 'E' && map[i][j] != 'P')
-			{
-				ft_printf("Error: Invalid character '%c' at row %d column %d\n",
-					map[i][j], i, j);
-				exit(1);
-			}
-			j++;
-		}
-		i++;
-	}
-	count_elements(map, &count);
-	check_elements_count(count);
+    data->count.player = 0;
+    data->count.exit = 0;
+    data->count.collectibles = 0;
+    y = 0;
+    while (data->map->map[y])
+    {
+        x = 0;
+        while (data->map->map[y][x])
+        {
+            if (data->map->map[y][x] == 'P') data->count.player++;
+            if (data->map->map[y][x] == 'E') data->count.exit++;
+            if (data->map->map[y][x] == 'C') data->count.collectibles++;
+            x++;
+        }
+        y++;
+    }
+    if (data->count.player != 1)
+        handle_error("Error: Map must contain one player\n");
+    if (data->count.collectibles < 1)
+        handle_error("Error: Nothing to collect man\n");
+    if (data->count.exit != 1)
+        handle_error("Error: Map must contain one Exit\n");
 }
 
-void	count_elements(char **map, t_count *count)
+void    validate_map(t_data *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'P')
-				count->p++;
-			if (map[i][j] == 'C')
-				count->c++;
-			if (map[i][j] == 'E')
-				count->e++;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	check_elements_count(t_count count)
-{
-	if (count.p != 1)
-	{
-		printf("Error: Map must contain exactly one player P\n");
-		exit(1);
-	}
-	if (count.c < 1)
-	{
-		printf("Error: Map must contain at least one collectible C\n");
-		exit(1);
-	}
-	if (count.e != 1)
-	{
-		printf("Error: Map must contain exactly one exit E\n");
-		exit(1);
-	}
-}
-
-void	check_map_walls(char **map)
-{
-}
-
-void	check_map_format(char **map)
-{
-}
-
-void	check_map_path(char **map)
-{
-}
-
-void	validate_map(char **map)
-{
-	check_map_elements(map);
-	check_map_walls(map);
-	check_map_format(map);
-	check_map_path(map);
+    check_map(data);
+    check_elements(data);
 }

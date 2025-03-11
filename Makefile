@@ -13,16 +13,16 @@
 LIBFT_DIR = ../greg_lib
 
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX_DIR = ./minilibx-linux
+# MLX_DIR = ./minilibx-linux
 
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror
-MLX_FLAGS = -L $(MLX_DIR) -lmlx -L /usr/lib -lXext -lX11
+CFLAGS = -g -Wall -Wextra -Werror -fPIE
+# MLX_FLAGS = -L $(MLX_DIR) -lmlx -L /usr/lib -lXext -lX11
 
 SRC = src/main.c \
       src/utils.c \
 	  src/parsing.c \
-	  src/game_logic.c \
+	  src/game.c \
 	  src/player.c \
 	  src/rendering.c \
 	  src/hooks.c \
@@ -34,13 +34,13 @@ NAME = so_long
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(MLX_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(LIBFT_DIR) -I ../include -c $< -o $@
 
 clean:
 	$(MAKE) clean -C $(LIBFT_DIR)
