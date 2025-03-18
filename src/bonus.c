@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 14:22:47 by zamohame          #+#    #+#             */
-/*   Updated: 2025/03/18 16:02:25 by zamohame         ###   ########.fr       */
+/*   Created: 2025/03/18 15:31:45 by zamohame          #+#    #+#             */
+/*   Updated: 2025/03/18 16:06:02 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	main(int argc, char **argv)
+void	display_ui(t_data *data)
 {
-	t_data	data;
+	char	*moves_text;
+	char	*prefix;
+	char	*display;
 
-	if (argc != 2)
-		handle_error("Error: Where's the map 😔\n");
-	data.mlx = mlx_init();
-	if (!data.mlx)
-		handle_error("Error: mlx_init failed 😔\n");
-	data.map = malloc(sizeof(t_map));
-	*data.map = read_map(argv[1]);
-	data.moves = 0;
-	check_file_extension(argv);
-	validate_map(&data);
-	setup_game(&data);
-	setup_hooks(&data);
-	return (0);
+	prefix = "Moves: ";
+	moves_text = ft_itoa(data->moves);
+	display = ft_strjoin(prefix, moves_text);
+	mlx_string_put(data->mlx, data->win, 80, 80, 000000, display);
+	free(moves_text);
+	free(display);
 }
