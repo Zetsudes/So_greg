@@ -44,17 +44,3 @@ void	check_file_extension(char **argv)
 			".ber", 4) != 0)
 		handle_error("Error: Not a .ber file 😔\n");
 }
-
-void	check_path(t_data *data)
-{
-	int		i;
-	int		j;
-	char	**map;
-
-	i = 0;
-	j = 0;
-	map = data->map->map;
-	while (map[i][j])
-	{
-	}
-}

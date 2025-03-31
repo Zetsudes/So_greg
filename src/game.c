@@ -12,19 +12,14 @@
 
 #include "../include/so_long.h"
 
-void	game_loop(t_data *data)
-{
-	mlx_key_hook(data->win, key_hook, data);
-	mlx_loop(data->mlx);
-}
-
 void	setup_game(t_data *data)
 {
 	setup_window(data);
 	find_player_position(data);
+	find_villain_position(data);
 	load_images(data);
 	render_map(data);
-	display_ui(data);
+	display_moves(data);
 }
 
 void	setup_window(t_data *data)

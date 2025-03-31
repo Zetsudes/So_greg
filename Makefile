@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 LIBFT_DIR = greg_lib
-
 LIBFT = $(LIBFT_DIR)/libft.a
+
 MLX_DIR = ./minilibx-linux
 
 CC = gcc
@@ -26,7 +26,9 @@ SRC = src/main.c \
 	  src/player.c \
 	  src/render.c \
 	  src/hooks.c \
-	  src/bonus.c \
+	  src/path.c \
+	  bonus/villain.c \
+	  bonus/move_count.c \
 
 OBJ = $(SRC:.c=.o)
 NAME = so_long

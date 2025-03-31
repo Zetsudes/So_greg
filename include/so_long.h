@@ -56,6 +56,8 @@ typedef struct s_data
 	t_count	count;
 	int		player_x;
 	int		player_y;
+	int		villain_x;
+	int		villain_y;
 	int		moves;
 	void	*mlx;
 	void	*win;
@@ -72,6 +74,8 @@ void		check_file_extension(char **argv);
 void		check_elements(t_data *data);
 void		check_path(t_data *data);
 void		validate_map(t_data *data);
+void		copy_map(char **src, char **dest, int size_y);
+void		flood_fill(char **map, int x, int y);
 
 /***** Map rendering *****/
 
@@ -86,8 +90,13 @@ void		render_villain(t_data *data, int x, int y);
 
 void		move_player(t_data *data, int new_x, int new_y);
 void		update_position(t_data *data, int new_x, int new_y);
-void		game_loop(t_data *data);
 void		find_player_position(t_data *data);
+
+/***** Villain handling *****/
+
+void		move_villain(t_data *data, int new_x, int new_y);
+void		update_villain_position(t_data *data, int new_x, int new_y);
+void		find_villain_position(t_data *data);
 
 /***** Game *****/
 
@@ -99,6 +108,6 @@ void		setup_window(t_data *data);
 
 int			key_hook(int keycode, t_data *data);
 void		setup_hooks(t_data *data);
-void		display_ui(t_data *data);
+void		display_moves(t_data *data);
 
 #endif

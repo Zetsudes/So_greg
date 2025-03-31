@@ -42,6 +42,7 @@ void	move_player(t_data *data, int new_x, int new_y)
 	else if (data->map->map[new_y][new_x] == 'E')
 		return ;
 	update_position(data, new_x, new_y);
+	move_villain(data);
 	render_map(data);
 }
 

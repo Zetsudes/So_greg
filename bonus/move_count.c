@@ -12,7 +12,7 @@
 
 #include "../include/so_long.h"
 
-void	display_ui(t_data *data)
+void	display_moves(t_data *data)
 {
 	char	*moves_text;
 	char	*prefix;
@@ -25,3 +25,4 @@ void	display_ui(t_data *data)
 	free(moves_text);
 	free(display);
 }
+

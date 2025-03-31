@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	data.moves = 0;
 	check_file_extension(argv);
 	validate_map(&data);
+	check_path(&data);
 	setup_game(&data);
 	setup_hooks(&data);
 	return (0);

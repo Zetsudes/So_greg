@@ -31,7 +31,7 @@ int	key_hook(int keycode, t_data *data)
 		move_player(data, data->player_x - 1, data->player_y);
 	else if (keycode == XK_d)
 		move_player(data, data->player_x + 1, data->player_y);
-	display_ui(data);
+	display_moves(data);
 	return (0);
 }
 
