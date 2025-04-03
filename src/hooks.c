@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:04 by zamohame          #+#    #+#             */
-/*   Updated: 2025/03/18 16:01:48 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:04:48 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	close_game(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
+	free_images(data);
+	free_map(data);
+	if (data->mlx && data->win)
+		mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 	return (0);
 }
@@ -39,5 +42,4 @@ void	setup_hooks(t_data *data)
 {
 	mlx_hook(data->win, 2, 1L << 0, key_hook, data);
 	mlx_hook(data->win, 17, 0, close_game, data);
-	mlx_loop(data->mlx);
 }

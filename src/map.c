@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:13:09 by zamohame          #+#    #+#             */
-/*   Updated: 2025/03/18 13:57:06 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:12:12 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,26 @@ void	check_elements(t_data *data)
 
 t_map	read_map(const char *file)
 {
-	int		fd;
 	t_map	map_data;
 	char	*line;
-	char	*set;
+	int		fd;
 	int		line_count;
 
-	set = " \n";
 	line_count = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		handle_error("Error: Could not open map 😔\n");
-	map_data.map = malloc(sizeof(char *) * 100);
+	map_data.map = malloc(sizeof(char *) * 101);
 	if (!map_data.map)
 		handle_error("Error: Memory allocation failed 😔\n");
 	while ((line = get_next_line(fd)))
 	{
-		map_data.map[line_count] = ft_strtrim(line, set);
+		map_data.map[line_count++] = ft_strtrim(line, " \n");
+		if (line_count == 1)
+			map_data.size_x = ft_strlen(map_data.map[0]);
 		free(line);
-		if (line_count == 0)
-			map_data.size_x = ft_strlen(map_data.map[line_count]);
-		line_count++;
 	}
+	map_data.map[line_count] = NULL;
 	close(fd);
 	map_data.size_y = line_count;
 	return (map_data);

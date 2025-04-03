@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 12:09:28 by zamohame          #+#    #+#             */
+/*   Updated: 2025/04/03 13:20:03 by zamohame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 void	flood_fill(char **map, int x, int y)
 {
 	if (map[y][x] == '1' || map[y][x] == 'F')
-		return;
+		return ;
 	map[y][x] = 'F';
 	flood_fill(map, x + 1, y);
 	flood_fill(map, x - 1, y);
@@ -14,7 +25,9 @@ void	flood_fill(char **map, int x, int y)
 
 void	copy_map(char **src, char **dest, int size_y)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < size_y)
 	{
 		dest[i] = ft_strdup(src[i]);

@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:15 by zamohame          #+#    #+#             */
-/*   Updated: 2025/03/18 16:04:21 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:14:18 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	move_player(t_data *data, int new_x, int new_y)
 	else if (data->map->map[new_y][new_x] == 'E')
 		return ;
 	update_position(data, new_x, new_y);
-	move_villain(data);
+	if (data->moves > 10)
+		move_villain(data);
 	render_map(data);
 }
 
@@ -67,5 +68,5 @@ void	find_player_position(t_data *data)
 		}
 		y++;
 	}
-	handle_error("Error: Player position not found 😔\n");
+	handle_error("Error: No player found 😔\n");
 }

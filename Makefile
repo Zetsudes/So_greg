@@ -6,7 +6,7 @@
 #    By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 16:31:26 by zamohame          #+#    #+#              #
-#    Updated: 2025/03/18 15:31:34 by zamohame         ###   ########.fr        #
+#    Updated: 2025/04/03 12:39:53 by zamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -fPIE
 MLX_FLAGS = -L $(MLX_DIR) -lmlx -L /usr/lib -lXext -lX11
 
-SRC = src/main.c \
+SRC = src/so_long.c \
       src/utils.c \
 	  src/map.c \
 	  src/game.c \
@@ -27,8 +27,10 @@ SRC = src/main.c \
 	  src/render.c \
 	  src/hooks.c \
 	  src/path.c \
+	  src/clean.c \
 	  bonus/villain.c \
 	  bonus/move_count.c \
+	  bonus/animation.c \
 
 OBJ = $(SRC:.c=.o)
 NAME = so_long

@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:26 by zamohame          #+#    #+#             */
-/*   Updated: 2025/03/18 13:55:04 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:31:29 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_elements(t_data *data)
 	data->count.player = 0;
 	data->count.exit = 0;
 	data->count.collectible = 0;
+	data->count.villain = 0;
 }
 
 void	elements_errors(t_data *data)
