@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:22:47 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 12:16:04 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:25:02 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
-		handle_error("Error: Where's the map 😔\n");
+		handle_error("Error: Where's the map 😔\n", &data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
-		handle_error("Error: mlx_init failed 😔\n");
+		handle_error("Error: mlx_init failed 😔\n", &data);
 	data.map = malloc(sizeof(t_map));
-	*data.map = read_map(argv[1]);
+	*data.map = read_map(argv[1], &data);
 	data.moves = 0;
-	check_file_extension(argv);
+	check_file_extension(argv, &data);
 	validate_map(&data);
 	find_player_position(&data);
 	find_villain_position(&data);

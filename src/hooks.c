@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:04 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 13:04:48 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:11:31 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 
 int	close_game(t_data *data)
 {
-	free_images(data);
-	free_map(data);
-	if (data->mlx && data->win)
-		mlx_destroy_window(data->mlx, data->win);
+	int	i;
+
+	i = 0;
+	clean_images(data);
+	while (i < data->map->size_y)
+	{
+		free(data->map->map[i]);
+		i++;
+	}
+	free(data->map->map);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit(0);
 	return (0);
 }

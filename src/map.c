@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:13:09 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 12:12:12 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:21:32 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	check_map(t_data *data)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C'
 				&& map[i][j] != 'P' && map[i][j] != 'E' && map[i][j] != 'V')
-				handle_error("Error: Invalid character found in map 😔\n");
+				handle_error("Error: Invalid character found in map 😔\n", data);
 			if ((i == 0 || j == 0 || i == data->map->size_y - 1
 					|| j == data->map->size_x - 1) && map[i][j] != '1')
-				handle_error("Error: Map borders must be walls 😔\n");
+				handle_error("Error: Map borders must be walls 😔\n", data);
 			j++;
 		}
 		i++;
@@ -56,11 +56,11 @@ void	check_map_format(t_data *data)
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != (size_t)len)
-			handle_error("Error: Map must be rectangular 😔\n");
+			handle_error("Error: Map must be rectangular 😔\n", data);
 		i++;
 	}
 	if (i == len)
-		handle_error("Error: Map cannot be square 😔\n");
+		handle_error("Error: Map cannot be square 😔\n", data);
 }
 
 void	check_elements(t_data *data)
@@ -90,7 +90,7 @@ void	check_elements(t_data *data)
 	elements_errors(data);
 }
 
-t_map	read_map(const char *file)
+t_map	read_map(const char *file, t_data *data)
 {
 	t_map	map_data;
 	char	*line;
@@ -100,16 +100,18 @@ t_map	read_map(const char *file)
 	line_count = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		handle_error("Error: Could not open map 😔\n");
+		handle_error("Error: Could not open map 😔\n", data);
 	map_data.map = malloc(sizeof(char *) * 101);
 	if (!map_data.map)
-		handle_error("Error: Memory allocation failed 😔\n");
-	while ((line = get_next_line(fd)))
+		handle_error("Error: Memory allocation failed 😔\n", data);
+	line = get_next_line(fd);
+	while (line)
 	{
 		map_data.map[line_count++] = ft_strtrim(line, " \n");
 		if (line_count == 1)
 			map_data.size_x = ft_strlen(map_data.map[0]);
 		free(line);
+		line = get_next_line(fd);
 	}
 	map_data.map[line_count] = NULL;
 	close(fd);

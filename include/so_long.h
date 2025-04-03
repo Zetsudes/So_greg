@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 20:48:51 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 15:59:53 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:26:31 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ typedef struct s_data
 
 /***** Map checking *****/
 
-void			handle_error(const char *message);
+void			handle_error(const char *message, t_data *data);
 void			elements_errors(t_data *data);
 void			check_map(t_data *data);
 void			check_map_format(t_data *data);
-void			check_file_extension(char **argv);
+void			check_file_extension(char **argv, t_data *data);
 void			check_elements(t_data *data);
 void			check_path(t_data *data);
 void			validate_map(t_data *data);
-void			copy_map(char **src, char **dest, int size_y);
+void			copy_map(char **src, char **dest, int size_y, t_data *data);
 void			flood_fill(char **map, int x, int y);
 
 /***** Map rendering *****/
@@ -90,7 +90,7 @@ void			flood_fill(char **map, int x, int y);
 void			init_elements(t_data *data);
 void			load_images(t_data *data);
 void			load_collectible(t_data *data);
-t_map			read_map(const char *file);
+t_map			read_map(const char *file, t_data *data);
 void			render_map(t_data *data);
 void			render_elements(t_data *data, int x, int y);
 
@@ -127,6 +127,6 @@ void			display_moves(t_data *data);
 /***** Cleaning *****/
 
 void			free_map(t_data *data);
-void			free_images(t_data *data);
+void			clean_images(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:15 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 13:14:18 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:25:29 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	find_player_position(t_data *data)
 		}
 		y++;
 	}
-	handle_error("Error: No player found 😔\n");
+	handle_error("Error: No player found 😔\n", data);
 }

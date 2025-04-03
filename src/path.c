@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 12:09:28 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 13:20:03 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:26:46 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	flood_fill(char **map, int x, int y)
 	flood_fill(map, x, y - 1);
 }
 
-void	copy_map(char **src, char **dest, int size_y)
+void	copy_map(char **src, char **dest, int size_y, t_data *data)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ void	copy_map(char **src, char **dest, int size_y)
 	{
 		dest[i] = ft_strdup(src[i]);
 		if (!dest[i])
-			handle_error("Error: Memory allocation failed 😔\n");
+			handle_error("Error: Memory allocation failed 😔\n", data);
 		i++;
 	}
 	dest[i] = NULL;
@@ -46,8 +46,8 @@ void	check_path(t_data *data)
 
 	map_copy = malloc(sizeof(char *) * (data->map->size_y + 1));
 	if (!map_copy)
-		handle_error("Error: Memory allocation failed 😔\n");
-	copy_map(data->map->map, map_copy, data->map->size_y);
+		handle_error("Error: Memory allocation failed 😔\n", data);
+	copy_map(data->map->map, map_copy, data->map->size_y, data);
 	flood_fill(map_copy, data->player_x, data->player_y);
 	y = 0;
 	while (y < data->map->size_y)
@@ -56,7 +56,7 @@ void	check_path(t_data *data)
 		while (x < data->map->size_x)
 		{
 			if (map_copy[y][x] == 'C' || map_copy[y][x] == 'E')
-				handle_error("Error: Map has unreachable elements 😔\n");
+				handle_error("Error: Map has unreachable elements 😔\n", data);
 			x++;
 		}
 		free(map_copy[y]);
