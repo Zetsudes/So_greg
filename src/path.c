@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 12:09:28 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 16:26:46 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:40:05 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	check_path(t_data *data)
 
 	map_copy = malloc(sizeof(char *) * (data->map->size_y + 1));
 	if (!map_copy)
-		handle_error("Error: Memory allocation failed 😔\n", data);
+		exit_error("Error: Memory allocation failed 😔\n");
 	copy_map(data->map->map, map_copy, data->map->size_y, data);
 	flood_fill(map_copy, data->player_x, data->player_y);
 	y = 0;
@@ -56,11 +56,13 @@ void	check_path(t_data *data)
 		while (x < data->map->size_x)
 		{
 			if (map_copy[y][x] == 'C' || map_copy[y][x] == 'E')
-				handle_error("Error: Map has unreachable elements 😔\n", data);
+			{
+				free_copy_map(map_copy, data->map->size_y);
+				free_all(data, "Error: Map has unreachable elements 😔\n");
+			}
 			x++;
 		}
-		free(map_copy[y]);
 		y++;
 	}
-	free(map_copy);
+	free_copy_map(map_copy, data->map->size_y);
 }

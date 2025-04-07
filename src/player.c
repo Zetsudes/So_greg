@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:15 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 16:25:29 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:38:11 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	move_player(t_data *data, int new_x, int new_y)
 	if (data->map->map[new_y][new_x] == 'E' && data->count.collectible == 0)
 	{
 		ft_printf("Quel GOAT! 🐐🎉\n");
+		cleanup_game(data);
 		exit(0);
 	}
 	else if (data->map->map[new_y][new_x] == 'E')

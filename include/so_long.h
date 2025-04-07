@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 20:48:51 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 16:26:31 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:27:50 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_img
 	void		*wall;
 	void		*floor;
 	void		*player;
-	void		*jellyfish[4];
+	void		*jellyfish[5];
 	void		*exit;
 	void		*villain;
 	int			img_width;
@@ -75,10 +75,11 @@ typedef struct s_data
 /***** Map checking *****/
 
 void			handle_error(const char *message, t_data *data);
+void			exit_error(const char *message);
 void			elements_errors(t_data *data);
 void			check_map(t_data *data);
 void			check_map_format(t_data *data);
-void			check_file_extension(char **argv, t_data *data);
+void			check_file_extension(char **argv);
 void			check_elements(t_data *data);
 void			check_path(t_data *data);
 void			validate_map(t_data *data);
@@ -126,7 +127,10 @@ void			display_moves(t_data *data);
 
 /***** Cleaning *****/
 
-void			free_map(t_data *data);
+void			cleanup_game(t_data *data);
+void			free_copy_map(char **map_copy, int size_y);
 void			clean_images(t_data *data);
+void			free_map(t_map *map);
+void			free_all(t_data *data, const char *message);
 
 #endif

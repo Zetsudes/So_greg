@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 12:08:45 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 16:17:19 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/06 12:41:29 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	move_villain(t_data *data)
 	if (data->map->map[new_y][new_x] == 'P')
 	{
 		ft_printf("FATALITY! 😈\n");
-		clean_images(data);
+		cleanup_game(data);
 		exit(0);
 	}
 	update_villain_position(data, new_x, new_y);

@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:13:09 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/03 16:21:32 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:34:18 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	check_map(t_data *data)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C'
 				&& map[i][j] != 'P' && map[i][j] != 'E' && map[i][j] != 'V')
-				handle_error("Error: Invalid character found in map 😔\n", data);
+				free_all(data, "Error: Invalid character found in map 😔\n");
 			if ((i == 0 || j == 0 || i == data->map->size_y - 1
 					|| j == data->map->size_x - 1) && map[i][j] != '1')
-				handle_error("Error: Map borders must be walls 😔\n", data);
+				free_all(data, "Error: Map borders must be walls 😔\n");
 			j++;
 		}
 		i++;
@@ -56,11 +56,11 @@ void	check_map_format(t_data *data)
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != (size_t)len)
-			handle_error("Error: Map must be rectangular 😔\n", data);
+			free_all(data, "Error: Map must be rectangular 😔\n");
 		i++;
 	}
 	if (i == len)
-		handle_error("Error: Map cannot be square 😔\n", data);
+		free_all(data, "Error: Map cannot be square 😔\n");
 }
 
 void	check_elements(t_data *data)
