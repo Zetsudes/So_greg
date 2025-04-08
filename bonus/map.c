@@ -6,11 +6,11 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:13:09 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:34:09 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:25:47 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	validate_map(t_data *data)
 {
@@ -33,7 +33,7 @@ void	check_map(t_data *data)
 		while (j < data->map->size_x)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C'
-				&& map[i][j] != 'P' && map[i][j] != 'E')
+				&& map[i][j] != 'P' && map[i][j] != 'E' && map[i][j] != 'V')
 				free_all(data, "Error: Invalid character found in map 😔\n");
 			if ((i == 0 || j == 0 || i == data->map->size_y - 1
 					|| j == data->map->size_x - 1) && map[i][j] != '1')
@@ -51,8 +51,6 @@ void	check_map_format(t_data *data)
 	char	**map;
 
 	map = data->map->map;
-	if (!map[0])
-		free_all(data, "Error: Map is empty 😔\n");
 	len = ft_strlen(map[0]);
 	i = 1;
 	while (map[i])
@@ -83,6 +81,8 @@ void	check_elements(t_data *data)
 				data->count.exit++;
 			if (data->map->map[y][x] == 'C')
 				data->count.collectible++;
+			if (data->map->map[y][x] == 'V')
+				data->count.villain++;
 			x++;
 		}
 		y++;

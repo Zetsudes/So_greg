@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 20:48:51 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:26:42 by zamohame         ###   ########.fr       */
+/*   Created: 2025/04/08 16:03:00 by zamohame          #+#    #+#             */
+/*   Updated: 2025/04/08 16:03:17 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../greg_lib/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -28,6 +28,7 @@ typedef struct s_count
 	int			player;
 	int			exit;
 	int			collectible;
+	int			villain;
 }				t_count;
 
 typedef struct s_map
@@ -42,11 +43,19 @@ typedef struct s_img
 	void		*wall;
 	void		*floor;
 	void		*player;
-	void		*collectible;
+	void		*jellyfish[5];
 	void		*exit;
+	void		*villain;
 	int			img_width;
 	int			img_height;
 }				t_img;
+
+typedef struct s_animation
+{
+	int			frame_counter;
+	int			current_frame;
+	int			anim_speed;
+}				t_animation;
 
 typedef struct s_data
 {
@@ -54,10 +63,13 @@ typedef struct s_data
 	t_count		count;
 	int			player_x;
 	int			player_y;
+	int			villain_x;
+	int			villain_y;
 	int			moves;
 	void		*mlx;
 	void		*win;
 	t_img		img;
+	t_animation	jellyfish_anim;
 }				t_data;
 
 /***** Map checking *****/
@@ -78,6 +90,7 @@ void			flood_fill(char **map, int x, int y);
 
 void			init_elements(t_data *data);
 void			load_images(t_data *data);
+void			load_collectible(t_data *data);
 t_map			read_map(const char *file, t_data *data);
 void			render_map(t_data *data);
 void			render_elements(t_data *data, int x, int y);
@@ -87,6 +100,18 @@ void			render_elements(t_data *data, int x, int y);
 void			move_player(t_data *data, int new_x, int new_y);
 void			update_position(t_data *data, int new_x, int new_y);
 void			find_player_position(t_data *data);
+
+/***** Villain handling *****/
+
+void			move_villain(t_data *data);
+void			update_villain_position(t_data *data, int new_x, int new_y);
+void			find_villain_position(t_data *data);
+void			speed_villain(t_data *data, int *new_x, int *new_y);
+
+/***** Animation *****/
+void			init_animations(t_data *data);
+void			update_jellyfish_animation(t_data *data);
+int				update_animation(void *param);
 
 /***** Game *****/
 
@@ -98,6 +123,7 @@ void			setup_window(t_data *data);
 
 int				key_hook(int keycode, t_data *data);
 void			setup_hooks(t_data *data);
+void			display_moves(t_data *data);
 
 /***** Cleaning *****/
 

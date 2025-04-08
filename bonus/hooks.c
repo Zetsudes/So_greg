@@ -6,11 +6,11 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:04 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:18:13 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:50:43 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 int	close_game(t_data *data)
 {
@@ -31,6 +31,7 @@ int	key_hook(int keycode, t_data *data)
 		move_player(data, data->player_x - 1, data->player_y);
 	else if (keycode == XK_d)
 		move_player(data, data->player_x + 1, data->player_y);
+	display_moves(data);
 	return (0);
 }
 

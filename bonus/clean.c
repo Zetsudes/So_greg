@@ -6,14 +6,16 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:30:05 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:11:56 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:25:35 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	clean_images(t_data *data)
 {
+	int	i;
+
 	if (data->img.wall)
 		mlx_destroy_image(data->mlx, data->img.wall);
 	if (data->img.floor)
@@ -22,8 +24,15 @@ void	clean_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->img.player);
 	if (data->img.exit)
 		mlx_destroy_image(data->mlx, data->img.exit);
-	if (data->img.collectible)
-		mlx_destroy_image(data->mlx, data->img.collectible);
+	if (data->img.villain)
+		mlx_destroy_image(data->mlx, data->img.villain);
+	i = 0;
+	while (i < 5)
+	{
+		if (data->img.jellyfish[i])
+			mlx_destroy_image(data->mlx, data->img.jellyfish[i]);
+		i++;
+	}
 }
 
 void	cleanup_game(t_data *data)

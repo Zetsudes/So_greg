@@ -6,11 +6,11 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:26 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:17:37 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:46:15 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	handle_error(const char *message, t_data *data)
 {
@@ -31,6 +31,9 @@ void	init_elements(t_data *data)
 	data->count.player = 0;
 	data->count.exit = 0;
 	data->count.collectible = 0;
+	data->count.villain = 0;
+	data->villain_x = -1;
+	data->villain_y = -1;
 }
 
 void	elements_errors(t_data *data)
@@ -41,6 +44,8 @@ void	elements_errors(t_data *data)
 		free_all(data, "Error: Nothing to collect man 😔\n");
 	if (data->count.exit != 1)
 		free_all(data, "Error: Map must contain one exit 😔\n");
+	if (data->count.villain != 1)
+		free_all(data, "Error: Map must contain one villain 😔\n");
 }
 
 void	check_file_extension(char **argv)

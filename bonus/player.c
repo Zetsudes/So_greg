@@ -6,11 +6,11 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:15 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:14:59 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:25:58 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	update_position(t_data *data, int new_x, int new_y)
 {
@@ -43,6 +43,8 @@ void	move_player(t_data *data, int new_x, int new_y)
 	else if (data->map->map[new_y][new_x] == 'E')
 		return ;
 	update_position(data, new_x, new_y);
+	if (data->moves > 10)
+		move_villain(data);
 	render_map(data);
 }
 

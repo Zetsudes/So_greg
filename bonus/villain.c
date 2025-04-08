@@ -6,11 +6,11 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 12:08:45 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/06 12:41:29 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:47:12 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	update_villain_position(t_data *data, int new_x, int new_y)
 {
@@ -77,4 +77,5 @@ void	find_villain_position(t_data *data)
 		}
 		y++;
 	}
+	handle_error("Error: No villain found 😔\n", data);
 }
