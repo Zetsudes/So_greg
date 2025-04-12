@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:20 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:26:01 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:04:11 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ void	load_images(t_data *data)
 			&data->img.img_width, &data->img.img_height);
 	data->img.villain = mlx_xpm_file_to_image(data->mlx, "assets/villain2.xpm",
 			&data->img.img_width, &data->img.img_height);
+}
+
+void	image_error(t_data *data)
+{
+	clean_images(data);
+	if (!data->img.wall || !data->img.floor || !data->img.player
+		|| !data->img.exit || !data->img.jellyfish[0] || !data->img.jellyfish[1]
+		|| !data->img.jellyfish[2] || !data->img.jellyfish[3]
+		|| !data->img.jellyfish[4])
+		free_all(data, "whats up with the image bro 😔\n");
 }
 
 void	load_collectible(t_data *data)
@@ -65,6 +75,7 @@ void	render_map(t_data *data)
 
 void	render_elements(t_data *data, int x, int y)
 {
+	image_error(data);
 	if (data->map->map[y][x] == '1')
 		mlx_put_image_to_window(data->mlx, data->win, data->img.wall, x * 64, y
 			* 64);

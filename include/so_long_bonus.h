@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:03:00 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:03:17 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:38:28 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_data
 void			handle_error(const char *message, t_data *data);
 void			exit_error(const char *message);
 void			elements_errors(t_data *data);
+void			image_error(t_data *data);
 void			check_map(t_data *data);
 void			check_map_format(t_data *data);
 void			check_file_extension(char **argv);

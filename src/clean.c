@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:30:05 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/08 16:11:56 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:58:16 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	free_map(t_map *map)
 
 void	free_all(t_data *data, const char *message)
 {
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
 	free_map(data->map);
 	free(data->map);
 	mlx_destroy_display(data->mlx);
