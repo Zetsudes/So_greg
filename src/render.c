@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:23:20 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/12 16:01:57 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:05:32 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ void	load_images(t_data *data)
 
 void	image_error(t_data *data)
 {
-	clean_images(data);
 	if (!data->img.wall || !data->img.floor || !data->img.player
 		|| !data->img.exit || !data->img.collectible)
+	{
+		clean_images(data);
 		free_all(data, "whats up with the image bro 😔\n");
+	}
 }
+
 void	render_map(t_data *data)
 {
 	int	y;

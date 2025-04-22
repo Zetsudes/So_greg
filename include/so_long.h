@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 20:48:51 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/12 15:44:03 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:54:08 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,16 @@ typedef struct s_data
 	t_img	img;
 }			t_data;
 
+typedef struct s_found
+{
+	int		collectible;
+	int		exit;
+}			t_found;
+
 /***** Map checking *****/
 
 void		handle_error(const char *message, t_data *data);
-void		exit_error(const char *message);
+void		exit_error(const char *message, t_data *data);
 void		elements_errors(t_data *data);
 void		image_error(t_data *data);
 void		check_map(t_data *data);
@@ -73,7 +79,8 @@ void		check_elements(t_data *data);
 void		check_path(t_data *data);
 void		validate_map(t_data *data);
 void		copy_map(char **src, char **dest, int size_y, t_data *data);
-void		flood_fill(char **map, int x, int y);
+void		flood_fill(char **map, int x, int y, t_found *found);
+void		replace_exit_with_wall(char **map, int height);
 
 /***** Map rendering *****/
 
