@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:23:23 by zamohame          #+#    #+#             */
-/*   Updated: 2025/04/12 15:24:10 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:14:19 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,11 @@ char	*save_remainder(char *buffer)
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (!buffer[i])
-	{
-		free(buffer);
-		return (NULL);
-	}
+	if (!buffer[i] || buffer[i + 1] == '\0')
+		return (free_buffer(buffer));
 	remainder = malloc(ft_strlen(buffer) - i);
 	if (!remainder)
-	{
-		free(remainder);
-		return (NULL);
-	}
+		return (free_buffer(buffer));
 	i++;
 	j = 0;
 	while (buffer[i])
@@ -65,6 +59,13 @@ char	*save_remainder(char *buffer)
 	remainder[j] = '\0';
 	free(buffer);
 	return (remainder);
+}
+
+char	*free_buffer(char *buffer)
+{
+	if (buffer)
+		free(buffer);
+	return (NULL);
 }
 
 int	handle_line(int fd, char **buffer, char *temp)
@@ -120,8 +121,8 @@ char	*get_next_line(int fd)
 	free(temp);
 	return (line);
 }
-
-/* int	main(void)
+/*
+int	main(void)
 {
 	int		fd;
 	int		count;

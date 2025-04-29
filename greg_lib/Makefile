@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zamohame <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 11:20:25 by zamohame          #+#    #+#              #
-#    Updated: 2024/11/15 18:55:59 by zamohame         ###   ########.fr        #
+#    Updated: 2025/03/13 14:18:35 by zamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fPIC
+
+CFLAGS = -Wall -Wextra -Werror -fPIC -I include 
 AR = ar
 
 SRC = ft_isalpha.c \
@@ -47,15 +47,15 @@ SRC = ft_isalpha.c \
       ft_putstr_fd.c \
       ft_putendl_fd.c \
       ft_putnbr_fd.c \
-      print_greg/ft_printf.c \
-      print_greg/handle_char.c \
-      print_greg/handle_hex.c \
-      print_greg/handle_number.c \
-      print_greg/handle_percent.c \
-      print_greg/handle_pointer.c \
-      print_greg/handle_string.c \
-      print_greg/handle_unsigned.c \
-      greg_next_line/get_next_line.c \
+	  print_greg/ft_printf.c \
+	  print_greg/handle_char.c \
+	  print_greg/handle_hex.c \
+	  print_greg/handle_number.c \
+	  print_greg/handle_percent.c \
+	  print_greg/handle_pointer.c \
+	  print_greg/handle_string.c \
+	  print_greg/handle_unsigned.c \
+	  greg_next_line/get_next_line.c \
 
 BSRC = ft_lstnew.c \
        ft_lstadd_front.c \
@@ -79,7 +79,7 @@ $(NAME): $(OBJ)
 	$(AR) -r $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 bonus: $(OBJ) $(BONUS_OBJ)
 	$(AR) -r $(NAME) $(OBJ) $(BONUS_OBJ)
